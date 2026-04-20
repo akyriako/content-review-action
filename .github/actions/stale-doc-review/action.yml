@@ -102,7 +102,7 @@ runs:
             --jq '. | length')
 
           if [ "$existing_issue_count" -gt 0 ]; then
-            echo "Skipping issue creation (already exists for $rel_file)"
+            echo "Skipping issue creation for $rel_file (already exists)"
             continue
           fi
 

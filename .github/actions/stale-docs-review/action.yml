@@ -84,7 +84,7 @@ runs:
 
           IFS='|' read -r commit_epoch commit_iso committer_name committer_email < /tmp/stale_doc_gitinfo.txt
 
-          age_days=$(( (now_epoch - commit_epoch) / 60 ))
+          age_days=$(( (now_epoch - commit_epoch) / 86400 ))
 
           if [ "$age_days" -lt "$threshold_days" ]; then
             echo "Skipping $file ($age_days days old, threshold is $threshold_days)."

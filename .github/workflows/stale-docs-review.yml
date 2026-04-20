@@ -10,7 +10,7 @@ on:
       stale_after_days:
         description: Stale threshold in days
         required: true
-        default: "1"
+        default: "360"
   push:
     branches:
       - main
@@ -32,6 +32,6 @@ jobs:
         uses: ./.github/actions/stale-docs-review
         with:
           docs_folder: ${{ inputs.docs_folder || 'docs' }}
-          stale_after_days: ${{ inputs.stale_after_days || '1' }}
+          stale_after_days: ${{ inputs.stale_after_days || '360' }}
           issue_title_prefix: "Stale Content Review:"
           issue_label: "stale-content-review"

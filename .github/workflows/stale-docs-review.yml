@@ -1,4 +1,4 @@
-name: Stale doc review
+name: Stale Content Review
 
 on:
   workflow_dispatch:
@@ -28,8 +28,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run stale doc review
-        uses: ./.github/actions/stale-doc-review
+      - name: Run Stale Content Scan
+        uses: ./.github/actions/stale-docs-review
         with:
           docs_folder: ${{ inputs.docs_folder || 'docs' }}
           stale_after_days: ${{ inputs.stale_after_days || '1' }}

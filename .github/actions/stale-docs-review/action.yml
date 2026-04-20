@@ -1,4 +1,4 @@
-name: Stale doc review
+name: Stale Docs Review
 description: Create review issues for markdown docs whose last Git update is older than or equal to a threshold.
 
 inputs:

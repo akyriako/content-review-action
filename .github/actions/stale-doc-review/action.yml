@@ -95,30 +95,19 @@ runs:
           file_url="$SERVER_URL/$REPO/blob/$SHA/$rel_file"
           title="$ISSUE_TITLE_PREFIX $rel_file"
 
-          # Check if an open issue already exists with this exact title
-          existing_issue_count=$(gh issue list \
-            --search "$title in:title state:open" \
-            --json title \
-            --jq '. | length')
-
-          if [ "$existing_issue_count" -gt 0 ]; then
-            echo "Issue already exists for $rel_file — skipping"
-            continue
-          fi
-
           body_file="$(mktemp)"
           cat > "$body_file" <<EOF
-This documentation file should be reviewed.
+        This documentation file should be reviewed.
 
-- **File:** \`$rel_file\`
-- **Last updated:** $commit_iso
-- **Last committer:** $committer_name <$committer_email>
-- **Current file link:** $file_url
-- **Age:** $age_minutes minutes
-- **Threshold:** $threshold_minutes minutes
+        - **File:** \`$rel_file\`
+        - **Last updated:** $commit_iso
+        - **Last committer:** $committer_name <$committer_email>
+        - **Current file link:** $file_url
+        - **Age:** $age_days days
+        - **Threshold:** $threshold_days days
 
-Please review and update this document if needed.
-EOF
+        Please review and update this document if needed.
+        EOF
 
           gh issue create \
             --title "$title" \

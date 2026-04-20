@@ -108,17 +108,17 @@ runs:
 
           body_file="$(mktemp)"
           cat > "$body_file" <<EOF
-          This documentation file should be reviewed.
+This documentation file should be reviewed.
 
-          - **File:** \`$rel_file\`
-          - **Last updated:** $commit_iso
-          - **Last committer:** $committer_name <$committer_email>
-          - **Current file link:** $file_url
-          - **Age:** $age_minutes minutes
-          - **Threshold:** $threshold_minutes minutes
+- **File:** \`$rel_file\`
+- **Last updated:** $commit_iso
+- **Last committer:** $committer_name <$committer_email>
+- **Current file link:** $file_url
+- **Age:** $age_minutes minutes
+- **Threshold:** $threshold_minutes minutes
 
-          Please review and update this document if needed.
-          EOF
+Please review and update this document if needed.
+EOF
 
           gh issue create \
             --title "$title" \

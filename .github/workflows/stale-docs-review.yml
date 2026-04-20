@@ -16,7 +16,7 @@ on:
       - main
 
 jobs:
-  stale-doc-review:
+  stale-docs-scan:
     runs-on: ubuntu-latest
     permissions:
       contents: read

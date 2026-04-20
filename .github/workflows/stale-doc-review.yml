@@ -10,7 +10,7 @@ on:
       stale_after_days:
         description: Stale threshold in days
         required: true
-        default: "90"
+        default: "1"
   push:
     branches:
       - main

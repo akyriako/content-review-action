@@ -77,6 +77,13 @@ runs:
         threshold_days="$STALE_AFTER_DAYS"
 
         find "$DOCS_FOLDER" -type f \( -name "*.md" -o -name "*.mdx" \) | while read -r file; do
+          rel_file="${file#./}"
+          
+          filename="$(basename "$rel_file")"
+          if [ "$filename" = "index.md" ] || [ "$filename" = "index.mdx" ]; then
+            continue
+          fi
+
           if ! git log -1 --format='%ct|%cI|%cn|%ce' -- "$file" >/tmp/stale_doc_gitinfo.txt || [ ! -s /tmp/stale_doc_gitinfo.txt ]; then
             echo "Skipping $file because no git history was found."
             continue
@@ -91,14 +98,8 @@ runs:
             continue
           fi
 
-          rel_file="${file#./}"
           file_url="$SERVER_URL/$REPO/blob/$SHA/$rel_file"
           title="$ISSUE_TITLE_PREFIX $rel_file"
-
-          filename="$(basename "$rel_file")"
-          if [ "$filename" = "index.md" ] || [ "$filename" = "index.mdx" ]; then
-            continue
-          fi
 
           # Check if an open issue already exists with this exact title
           existing_issue_count=$(gh issue list \

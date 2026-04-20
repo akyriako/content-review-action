@@ -32,6 +32,6 @@ jobs:
         uses: ./.github/actions/stale-doc-review
         with:
           docs_folder: ${{ inputs.docs_folder || 'docs' }}
-          stale_after_days: ${{ inputs.stale_after_days || '90' }}
+          stale_after_days: ${{ inputs.stale_after_days || '1' }}
           issue_title_prefix: "Content Review:"
           issue_label: "content-review"

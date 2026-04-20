@@ -33,5 +33,5 @@ jobs:
         with:
           docs_folder: ${{ inputs.docs_folder || 'docs' }}
           stale_after_days: ${{ inputs.stale_after_days || '1' }}
-          issue_title_prefix: "Content Review:"
+          issue_title_prefix: "Stale Content Review:"
           issue_label: "stale-content-review"

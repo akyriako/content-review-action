@@ -13,7 +13,7 @@ inputs:
   issue_title_prefix:
     description: Prefix for created issue titles
     required: false
-    default: "Content Review:"
+    default: "Stale Content Review:"
 
   issue_label:
     description: Label to apply to created issues
@@ -94,6 +94,17 @@ runs:
           rel_file="${file#./}"
           file_url="$SERVER_URL/$REPO/blob/$SHA/$rel_file"
           title="$ISSUE_TITLE_PREFIX $rel_file"
+
+          # Check if an open issue already exists with this exact title
+          existing_issue_count=$(gh issue list \
+            --search "$title in:title state:open" \
+            --json title \
+            --jq '. | length')
+
+          if [ "$existing_issue_count" -gt 0 ]; then
+            echo "Issue already exists for $rel_file — skipping"
+            continue
+          fi
 
           body_file="$(mktemp)"
           cat > "$body_file" <<EOF

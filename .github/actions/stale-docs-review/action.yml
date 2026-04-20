@@ -95,6 +95,11 @@ runs:
           file_url="$SERVER_URL/$REPO/blob/$SHA/$rel_file"
           title="$ISSUE_TITLE_PREFIX $rel_file"
 
+          filename="$(basename "$rel_file")"
+          if [ "$filename" = "index.md" ] || [ "$filename" = "index.mdx" ]; then
+            continue
+          fi
+
           # Check if an open issue already exists with this exact title
           existing_issue_count=$(gh issue list \
             --search "$title in:title state:open" \

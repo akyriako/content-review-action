@@ -46,7 +46,7 @@ runs:
                 repo: context.repo.repo,
                 name: labelName,
                 color: "FBCA04",
-                description: "Documentation content review",
+                description: "Content review is required",
               });
               core.info(`Created label: ${labelName}`);
             } else {
@@ -102,7 +102,7 @@ runs:
             --jq '. | length')
 
           if [ "$existing_issue_count" -gt 0 ]; then
-            echo "Issue already exists for $rel_file — skipping"
+            echo "Skipping issue creation (already exists for $rel_file)"
             continue
           fi
 
